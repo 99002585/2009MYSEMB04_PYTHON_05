@@ -175,4 +175,34 @@ class customer_details:
         print("\n")
         print("---------------- THANK YOU --------------")
         
+'''
+Main code starts here
+'''
+while True:
+    print("\n")
+    print("1.Check in")
+    print("2.SHOW GUEST LIST")
+    print("3.Check out")
+    print("4.get info of any guest")
+    print("5.EXIT")
+    k = input("Enter choice:")
+    if k == "1":        #checkin
+        a = customer_details()
+        f = open("hotel.dat", "ab")
+        a.enter_details()
+        a.type_of_room()
+        a.payment_option()
+        a.bill()
+        pickle.dump(a, f, protocol=2)
+        f.close()
+    elif k == "2":      #Show guest list
+        f1 = open("hotel.dat", "rb")
+        print("NAME", "\t", "\t", "ROOM NO.")
+        try:
+            while True:
+                s = pickle.load(f1)
+                print(s.name, "\t", "\t", s.room)
+        except EOFError:
+            pass
+        f1.close()
     
