@@ -205,4 +205,38 @@ while True:
         except EOFError:
             pass
         f1.close()
-    
+    elif k == "3":      #checkout
+        print("\n")
+        while True:
+            a = input("ENTER ROOM NO.")
+            if len(a) != 0:
+                break
+            else:
+                print("no input found")
+                continue
+            v = int(a)
+        #v = int(a)
+        f = open("hotel.dat", "rb")
+        f1 = open("hote.dat", "ab")
+        n = 0
+        try:
+            while True:
+                s = pickle.load(f)
+                if s.room == v:
+                    n = 1
+                    name1 = s.name
+                    print(" ")
+                else:
+                    pickle.dump(s, f1)
+        except EOFError:
+            if n == 0:
+                print("NO GUEST IN ROOM ", v)
+            elif n == 1:
+                print("THANK YOU", name1, "2 FOR VISTING US")
+                print("HOPE YOU LIKE OUR SERVICE")
+                print("\n")
+            pass
+        f.close()
+        f1.close()
+        os.remove("hotel.dat")
+        os.rename("hote.dat", "hotel.dat")
