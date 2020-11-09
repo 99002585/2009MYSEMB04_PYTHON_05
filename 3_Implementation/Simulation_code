@@ -240,3 +240,41 @@ while True:
         f1.close()
         os.remove("hotel.dat")
         os.rename("hote.dat", "hotel.dat")
+    elif k == "4":      #get info of any guest
+        f2 = open("hotel.dat", "rb")
+        while True:
+            v = input("ENTER ROOM NO.")
+            if len(v) != 0:
+                break
+            else:
+                print("no input found")
+                continue
+        v = int(v)
+        try:
+            n = 0
+            while True:
+                s = pickle.load(f2)
+                a = s.room
+                if v == a:
+                    n = 1
+                    print("NAME-", "\t", "\t", s.name)
+                    print("\n")
+                    print("ADDRESS-", "\t", s.address)
+                    print("\n")
+                    print("MOBILE NO.-", "  ", s.mobile_no)
+                    print("\n")
+                    print("HIS TOTAL BILL IS Rs.", s.price)
+                elif EOFError:
+                    if n == 0:
+                        print("NO GUEST IN ROOM ", v)
+                else:
+                    n = 0
+                    continue
+        except EOFError:
+            pass
+        f2.close()
+    elif k == "5":      #exit
+        break
+    else:
+        print("invalid choice")
+        continue
