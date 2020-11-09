@@ -58,28 +58,38 @@ def check_number_of_days():     #checking number of days guest want to stay
             break
         else:
             print("invalid input")
-            
-            
-            
+def check_payment():        #checking payment method
+    while True:
+        print("\n")
+        op = input("Enter guest's choice:")
+        a = op.isdigit()
+        if len(op) != 0 and a == True and (op == "1" or op == "2"):
+            op = int(op)
+            return op
+            break
+        else:
+            print("invalid input ")
 
 
 '''
 defining a class with members as inputs from the user
 '''            
 class customer_details:
+    price = 0
+    room = "0"
     def __init__(self):     # defining a constructor to initialize class attributes
+        self.price = 0
         self.name = " "
         self.address = " "
         self.no_of_days = 0
+        self.room = "0"
 
     def enter_details(self):        #taking the details of the customer
         self.name = check_name()
         self.address = check_address()
         self.mobile_no = check_mobile_number()
         self.no_of_days = int(check_number_of_days())
-        
-    
-    
+  
     def type_of_room(self):     #entering the type of room customer want to choose
         print("1. Delux")
         print("2. Semi-Delux")
@@ -107,5 +117,62 @@ class customer_details:
             m[0] = 4
         else:
             print("invalid choice")
+            
+    def payment_option(self):       #entering the type of payment customer chooses
+        print("1. By cash")
+        print("2. By credit/debit card")
+        op = check_payment()
+        if op == 1:
+            print("No discount.")
+        elif op == 2:
+            self.price = self.price - ((self.price * 10) / 100)
+            print("Discount of 10%.")
+        else:
+            print("Invalid option.")
+            
+    def bill(self):     #generating the bill
+        print("\n")
+        print("----------------------------------------")
+        print("**************5 STAR HOTEL**************")
+        print("----------------------------------------")
+        print ("\n")
+        print("Name- ",self.name)
+        print("\n")
+        print("Address- ",self.address)
+        print("\n")
+        print("Mobile number- ",self.mobile_no)
+        print("\n")
+        print("Toatal bill- ",self.price)
+        print("\n")
+        if m[0] == 1:
+            a = Delux
+        elif m[0] == 2:
+            a = Semi_Delux
+        elif m[0] == 3:
+            a = General
+        elif m[0] == 4:
+            a = Joint_Room
+
+        G = []
+        f2 = open("hotel.dat", "rb")
+        try:
+            while True:
+                s = pickle.load(f2)     #loading a binary data from file and converting back to object
+                k = s.room      #taking the room number and storing in variable k
+                G.append(k)     #appending the room number to a list
+                continue
+        except EOFError:
+            pass
+
+        for r in a:     #finding the empty romm
+            if r not in G:
+                print(self.name, " - room", r, "is alloted to you")
+                self.room = r
+                break
+            else:
+                continue
+        self.room = r       #allocating empty room
+        print("\n")
+        print("---------------- THANK YOU --------------")
         
     
