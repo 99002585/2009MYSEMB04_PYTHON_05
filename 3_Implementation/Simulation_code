@@ -42,7 +42,7 @@ def check_mobile_number():      #checking mobile number of guest
     while True:
         print("\n")
         mobile_number=input("Enter the mobile number:")
-        if mobile_number.isdigit()==True and len(mobile_number)!=0:
+        if mobile_number.isdigit()==True and len(mobile_number)!=0 and len(mobile_number)==10:
             return mobile_number
             break
         else:
