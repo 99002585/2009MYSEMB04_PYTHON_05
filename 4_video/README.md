@@ -1,0 +1,1 @@
+The video walks through the introduction of team members and followed by the elaborate summary of the project and shown working of the python script in python IDE and shows how it takes inputs from the user and acts accordingly. Finally, we talk upon the future scope of the project.
